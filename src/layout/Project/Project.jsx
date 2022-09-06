@@ -86,14 +86,14 @@ const Project = () => {
     const [animate, setAnimate] = useState({})
 
     useEffect(() => {
-      setAnimate({y: 75, opacity: 0})
+      setAnimate({y: 50, opacity: 0})
       const clear = setTimeout(() => {
         const currentList = projectList.filter(
           (proj) => proj.tab === tabSelected
         );
         setProjectFilter(currentList);
         setAnimate({y: 0, opacity: 1})
-      }, 500);
+      }, 550);
       return () => {
         if(clear) {
           clearTimeout(clear)
