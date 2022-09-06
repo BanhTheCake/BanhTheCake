@@ -1,0 +1,44 @@
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: rgba(217, 217, 217, 0.1);
+    position: relative;
+    transition: all 0.2s linear;
+    img {
+        position: relative;
+        z-index: 10;
+        transition: all 0.2s linear;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: white;
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(0);
+        transform-origin: center;
+        transition: all 0.3s ease;
+    }
+
+    &:hover {
+        border-color: transparent;
+        img {
+            filter: brightness(0);
+        }
+        &::before {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+    }
+}

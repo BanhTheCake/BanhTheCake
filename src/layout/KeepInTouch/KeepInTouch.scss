@@ -1,0 +1,82 @@
+.keepInTouch {
+    background-image: linear-gradient(90.21deg, #aa367c -5.91%, #4a2fbd 111.58%);
+    padding: 6rem 4rem;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 2000px;
+    margin: auto;
+    padding-bottom: 10rem;
+    @media screen and (max-width: 1024px) {
+        padding: 2rem;
+        padding-bottom: 10rem;
+    }
+    @media screen and (max-width: 1024px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .img {
+        padding: 4rem;
+        display: flex;
+        img {
+            width: 100%;
+            max-width: 600px;
+            height: 100%;
+            margin: auto;
+        }
+    }
+    .form {
+        color: white;
+        & > h3 {
+            font-size: 4rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            line-height: 4.6rem;
+            margin-bottom: 4rem;
+        }
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            @media screen and (max-width: 700px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        .form-item {
+            margin-right: 2rem;
+            margin-bottom: 2rem;
+            @media screen and (max-width: 700px) {
+                margin-right: 0;
+            }
+            textarea,
+            input {
+                outline: none;
+                width: 100%;
+                padding: 1.6rem 2rem;
+                font-family: inherit;
+                border: thin solid white;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                font-size: 1.6rem;
+                font-weight: 500;
+                color: white;
+                transition: all 0.2s linear;
+
+                &::placeholder {
+                    color: white;
+                    font-size: 1.6rem;
+                    transition: all 0.2s linear;
+                }
+                &:focus {
+                    color: black;
+                    background-color: white;
+                    &::placeholder {
+                        color: black;
+                    }
+                }
+            }
+            textarea {
+                min-height: 200px;
+                resize: vertical;
+            }
+        }
+    }
+}
