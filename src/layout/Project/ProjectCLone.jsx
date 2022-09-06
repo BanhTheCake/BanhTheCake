@@ -3,7 +3,7 @@ import './Project.scss';
 import Img1 from '../../assets/img/project-img1.png';
 import Img2 from '../../assets/img/project-img2.png';
 import Img3 from '../../assets/img/project-img3.png';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from "framer-motion"
 
 const projectList = [
     {
@@ -83,22 +83,22 @@ const projectList = [
 const Project = () => {
     const [tabSelected, setTabSelected] = useState(0);
     const [projectFilter, setProjectFilter] = useState([]);
-    const [isChangeProjects, setIsChangeProjects] = useState(false)
+    const [animate, setAnimate] = useState({})
 
     useEffect(() => {
-        setIsChangeProjects(true)
+      setAnimate({y: [0, 50], opacity: [1, 0]})
+      const clear = setTimeout(() => {
         const currentList = projectList.filter(
-            (proj) => proj.tab === tabSelected
+          (proj) => proj.tab === tabSelected
         );
-        setProjectFilter(currentList)
-        const clear = setTimeout(() => {
-            setIsChangeProjects(false);
-        }, 550);
-        return () => {
-            if (clear) {
-                clearTimeout(clear);
-            }
-        };
+        setProjectFilter(currentList);
+        setAnimate({y: [50, 0], opacity: [0, 1]})
+      }, 550);
+      return () => {
+        if(clear) {
+          clearTimeout(clear)
+        }
+      }
     }, [tabSelected]);
 
     const handleClick = (index) => {
@@ -106,7 +106,7 @@ const Project = () => {
     };
 
     return (
-        <section id="Projects" className="project">
+        <section id='Projects' className="project">
             <h2>Projects</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -129,32 +129,27 @@ const Project = () => {
                     );
                 })}
             </div>
-            <AnimatePresence>
-            { !isChangeProjects && 
-                <motion.div
-                    className="project-list"
-                    initial={{y: 50, opacity: 0}}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.6 }}
-                    exit={{ y: [0, 50], opacity: [1, 0] }}
-                >
-                    { projectFilter.length > 0 && projectFilter?.map((item, index) => {
-                            return (
-                                <div
-                                    key={item.title + index}
-                                    className="project-item"
-                                >
-                                    <img src={item.img} alt="" />
-                                    <div className="text">
-                                        <h3>{item.title}</h3>
-                                        <p>{item.desc}</p>
-                                    </div>
-                                    <div className="overlay"></div>
+            <motion.div className="project-list"
+            animate={animate}
+            transition={{duration: 0.6}}
+            >
+                {projectFilter.length > 0 &&
+                    projectFilter?.map((item, index) => {
+                        return (
+                            <div
+                                key={item.title + index}
+                                className="project-item"
+                            >
+                                <img src={item.img} alt="" />
+                                <div className="text">
+                                    <h3>{item.title}</h3>
+                                    <p>{item.desc}</p>
                                 </div>
-                            );
-                        })}
-                </motion.div> }
-            </AnimatePresence>
+                                <div className="overlay"></div>
+                            </div>
+                        );
+                    })}
+            </motion.div>
         </section>
     );
 };
